@@ -161,7 +161,7 @@ def trip_duration_stats(df):
     # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
     print("The total travel time in seconds from the filtered data is: " + str(total_travel_time))
-    total_travel_time_hr = total_travel_time/3600
+    total_travel_time_hr = round(total_travel_time/3600,1)
     print("The total travel time in hours from the filtered data is: " + str(total_travel_time_hr))
     # TO DO: display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
@@ -204,6 +204,7 @@ def user_stats(df, city):
 def display_raw_data(df):    
     """Displays filtered raw data five rows at a time on user request."""
     
+    pd.set_option('display.max_columns',200)
     print(df.head())
     next_rows = 0
     while True:
@@ -212,6 +213,7 @@ def display_raw_data(df):
         if view_raw_data.lower() != 'yes':
             return
         next_rows = next_rows + 5
+        pd.set_option('display.max_columns',200)
         print(df.iloc[next_rows:next_rows + 5])
         
 # Define main function to call previous functions
